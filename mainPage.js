@@ -8,6 +8,8 @@ const state = document.getElementById('state');
 const city = document.getElementById('city');
 const phoneNumber = document.getElementById('phoneNumber');
 const githubURL = document.getElementById('githubURL');
+const facebookURL = document.getElementById('facebookURL');
+const twitterURL = document.getElementById('twitterURL');
 
 const emailError = document.querySelector('#mail + span.error');
 const firstNameError = document.querySelector('#firstName + span.error');
@@ -18,12 +20,17 @@ const stateError = document.querySelector('#state + span.error');
 const cityError = document.querySelector('#city + span.error');
 const phoneNumberError = document.querySelector('#phoneNumber + span.error');
 const githubURLError = document.querySelector('#githubURL + span.error');
+const facebookURLError = document.querySelector('#facebookURL + span.error');
+const twitterURLError = document.querySelector('#twitterURL + span.error');
 
 email.addEventListener('input', () => {
   // Each time the user types something, we check if the
   // form fields are valid.
 
-  if (email.validity.valid) {
+  let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const isValidEmail = emailRegex.test(email);
+
+  if (isValidEmail === true && email.validity.valid === true) {
     // In case there is an error message visible, if the field
     // is valid, we remove the error message.
     emailError.innerHTML = ''; // Reset the content of the message
@@ -133,19 +140,47 @@ githubURL.addEventListener('input', () => {
   }
 });
 
-form.addEventListener('submit', event => {
-  // if the email field is valid, we let the form submit
+facebookURL.addEventListener('input', () => {
+  let facebookURLRegex = /^https?:\/\/facebook.com\/[^\/]*\/?$/;
+  let isfacebookURLValid = facebookURLRegex.test(facebookURL.value);
 
-  if (!email.validity.valid) {
-    // If it isn't, we display an appropriate error message
-    showError(email, emailError);
-    // Then we prevent the form from being sent by canceling the event
+  if (isfacebookURLValid === true && facebookURL.validity.valid === true) {
+    facebookURLError.innerHTML = '';
+    facebookURLError.className = 'error';
+  } else {
+    showError(facebookURL, facebookURLError);
+  }
+});
+
+twitterURL.addEventListener('input', () => {
+  let twitterURLRegex = /^https?:\/\/twitter.com\/[^\/]*\/?$/;
+  let isTwitterURLValid = twitterURLRegex.test(twitterURL.value);
+
+  if (isTwitterURLValid === true && twitterURL.validity.valid === true) {
+    twitterURLError.innerHTML = '';
+    twitterURLError.className = 'error';
+  } else {
+    showError(twitterURL, twitterURLError);
+  }
+});
+
+form.addEventListener('submit', event => {
+  if (
+    email.value === '' ||
+    firstName.value === '' ||
+    lastName.value === '' ||
+    country.value === '' ||
+    pancard.value === '' ||
+    phoneNumber.value === '' ||
+    state.value === '' ||
+    city.value === '' ||
+    githubURL.value === '' ||
+    facebookURL.value === '' ||
+    twitterURL.value === ''
+  ) {
+    alert('Please Fill All Required Fields');
     event.preventDefault();
-  } else if (!firstName.validity.valid) {
-    // If it isn't, we display an appropriate error message
-    showError(firstName, firstNameError);
-    // Then we prevent the form from being sent by canceling the event
-    event.preventDefault();
+    return false;
   }
 });
 
@@ -155,10 +190,6 @@ const showError = (field, fieldError) => {
     // display the following error message.
 
     fieldError.textContent = `You need to enter a ${field.placeholder}.`;
-  } else if (field.validity.typeMismatch) {
-    // If the field doesn't contain an email address
-    // display the following error message.
-    fieldError.textContent = `Entered value needs to be an email address.`;
   } else if (!field.validity.valid) {
     fieldError.textContent = `Entered value needs to be a ${field.placeholder}`;
   } else if (field.validity.tooShort) {
