@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="container">
-      <form novalidate action="page2.html" method="GET">
+      <form name="Form" novalidate action="page2.html" method="GET">
         <div class="row">
           <div class="col">
             <input
@@ -53,7 +53,7 @@
               id="mail"
               required
               autocomplete="off"
-              type="email"
+              type="text"
               name="email"
               class="form-control"
               placeholder="Email"
@@ -154,25 +154,31 @@
         <div class="row">
           <div class="col">
             <input
+              id="facebookURL"
               required
               autocomplete="off"
               type="text"
               name="facebookURL"
+              minlength="22"
               class="form-control"
               placeholder="Facebook URL"
             />
+            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
+              id="twitterURL"
               required
               autocomplete="off"
               type="text"
               name="twitterURL"
               class="form-control"
               placeholder="Twitter URL"
+              minlength="21"
             />
+            <span class="error"></span>
           </div>
         </div>
         <div class="row">
