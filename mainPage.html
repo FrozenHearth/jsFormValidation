@@ -10,46 +10,62 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="mainPage.css" />
 
     <title>Form Validation</title>
   </head>
   <body>
     <div class="container">
-      <form action="page2.html" method="GET">
+      <form novalidate action="page2.html" method="GET">
         <div class="row">
           <div class="col">
             <input
+              id="firstName"
+              required
               autocomplete="off"
               type="text"
+              minlength="3"
+              maxlength="15"
               class="form-control"
               placeholder="First name"
               name="firstName"
             />
+            <span class="error"></span>
           </div>
           <div class="col">
             <input
+              required
+              minlength="3"
+              maxlength="15"
               autocomplete="off"
               type="text"
               class="form-control"
               placeholder="Last name"
               name="lastName"
+              id="lastName"
             />
+            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
+              id="mail"
+              required
               autocomplete="off"
               type="email"
               name="email"
               class="form-control"
               placeholder="Email"
+              minlength="8"
             />
+            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
+              required
               autocomplete="off"
               type="text"
               class="form-control"
@@ -61,6 +77,7 @@
         <div class="form-row">
           <div class="col-4">
             <input
+              required
               autocomplete="off"
               type="text"
               class="form-control"
@@ -70,6 +87,7 @@
           </div>
           <div class="col">
             <input
+              required
               autocomplete="off"
               type="text"
               class="form-control"
@@ -79,6 +97,7 @@
           </div>
           <div class="col">
             <input
+              required
               autocomplete="off"
               type="text"
               class="form-control"
@@ -90,18 +109,21 @@
         <div class="row">
           <div class="col">
             <input
+              required
               autocomplete="off"
               type="number"
               name="phoneNumber"
               class="form-control"
               placeholder="Phone Number"
               name="phNumber"
+              maxlength="10"
             />
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
+              required
               autocomplete="off"
               type="text"
               name="githubURL"
@@ -113,6 +135,7 @@
         <div class="row">
           <div class="col">
             <input
+              required
               autocomplete="off"
               type="text"
               name="facebookURL"
@@ -124,6 +147,7 @@
         <div class="row">
           <div class="col">
             <input
+              required
               autocomplete="off"
               type="text"
               name="twitterURL"
@@ -143,5 +167,6 @@
         </div>
       </form>
     </div>
+    <script src="mainPage.js"></script>
   </body>
 </html>
