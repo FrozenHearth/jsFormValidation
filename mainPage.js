@@ -6,6 +6,8 @@ const pancard = document.getElementById('pancard');
 const country = document.getElementById('country');
 const state = document.getElementById('state');
 const city = document.getElementById('city');
+const phoneNumber = document.getElementById('phoneNumber');
+const githubURL = document.getElementById('githubURL');
 
 const emailError = document.querySelector('#mail + span.error');
 const firstNameError = document.querySelector('#firstName + span.error');
@@ -14,6 +16,8 @@ const pancardError = document.querySelector('#pancard + span.error');
 const countryError = document.querySelector('#country + span.error');
 const stateError = document.querySelector('#state + span.error');
 const cityError = document.querySelector('#city + span.error');
+const phoneNumberError = document.querySelector('#phoneNumber + span.error');
+const githubURLError = document.querySelector('#githubURL + span.error');
 
 email.addEventListener('input', () => {
   // Each time the user types something, we check if the
@@ -102,6 +106,30 @@ city.addEventListener('input', () => {
     cityError.className = 'error';
   } else {
     showError(city, cityError);
+  }
+});
+
+phoneNumber.addEventListener('input', () => {
+  let phoneNumberRegex = /(7|8|9)\d{9}/;
+  let isPhoneNumberValid = phoneNumberRegex.test(phoneNumber.value);
+
+  if (isPhoneNumberValid === true && phoneNumber.validity.valid === true) {
+    phoneNumberError.innerHTML = '';
+    phoneNumberError.className = 'error';
+  } else {
+    showError(phoneNumber, phoneNumberError);
+  }
+});
+
+githubURL.addEventListener('input', () => {
+  let githubURLRegex = /^https?:\/\/github.com\/[^\/]*\/?$/;
+  let isGithubURLValid = githubURLRegex.test(githubURL.value);
+
+  if (isGithubURLValid === true && githubURL.validity.valid === true) {
+    githubURLError.innerHTML = '';
+    githubURLError.className = 'error';
+  } else {
+    showError(githubURL, githubURLError);
   }
 });
 
