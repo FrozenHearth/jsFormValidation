@@ -124,13 +124,16 @@
             <input
               required
               autocomplete="off"
-              type="number"
+              type="text"
               name="phoneNumber"
               class="form-control"
               placeholder="Phone Number"
               name="phNumber"
+              minlength="10"
               maxlength="10"
+              id="phoneNumber"
             />
+            <span class="error"></span>
           </div>
         </div>
         <div class="row">
@@ -142,7 +145,10 @@
               name="githubURL"
               class="form-control"
               placeholder="Github URL"
+              id="githubURL"
+              minlength="20"
             />
+            <span class="error"></span>
           </div>
         </div>
         <div class="row">
