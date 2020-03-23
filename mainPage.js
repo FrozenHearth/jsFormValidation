@@ -1,5 +1,5 @@
 const form = document.getElementsByTagName('form')[0];
-const email = document.getElementById('mail');
+const email = document.getElementById('email');
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
 const pancard = document.getElementById('pancard');
@@ -11,7 +11,7 @@ const githubURL = document.getElementById('githubURL');
 const facebookURL = document.getElementById('facebookURL');
 const twitterURL = document.getElementById('twitterURL');
 
-const emailError = document.querySelector('#mail + span.error');
+const emailError = document.querySelector('#email + span.error');
 const firstNameError = document.querySelector('#firstName + span.error');
 const lastNameError = document.querySelector('#lastName + span.error');
 const pancardError = document.querySelector('#pancard + span.error');
@@ -28,7 +28,7 @@ email.addEventListener('input', () => {
   // form fields are valid.
 
   let emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-  const isValidEmail = emailRegex.test(email);
+  const isValidEmail = emailRegex.test(email.value);
 
   if (isValidEmail === true && email.validity.valid === true) {
     // In case there is an error message visible, if the field
