@@ -5,6 +5,8 @@ const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
 
 const emailError = document.querySelector('#mail + span.error');
+const firstNameError = document.querySelector('#firstName + span.error');
+
 const lastNameError = document.querySelector('#lastName + span.error');
 
 email.addEventListener('input', () => {
