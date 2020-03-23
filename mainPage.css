@@ -1,6 +1,6 @@
 input:invalid {
-  border-color: #900;
-  background-color: #fdd;
+  border-color: rgb(194, 74, 74);
+  background-color: rgb(236, 174, 174);
 }
 
 input:focus:invalid {
@@ -13,12 +13,16 @@ input:focus:invalid {
   padding: 0;
   font-size: 80%;
   color: white;
-  background-color: #900;
+  background-color: rgb(194, 74, 74);
   border-radius: 0 0 5px 5px;
-
   box-sizing: border-box;
 }
 
 .error.active {
   padding: 0.3em;
+}
+
+.row,
+.form-row {
+  margin-top: 1em;
 }
