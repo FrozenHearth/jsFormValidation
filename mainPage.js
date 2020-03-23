@@ -1,13 +1,19 @@
 const form = document.getElementsByTagName('form')[0];
-
 const email = document.getElementById('mail');
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
+const pancard = document.getElementById('pancard');
+const country = document.getElementById('country');
+const state = document.getElementById('state');
+const city = document.getElementById('city');
 
 const emailError = document.querySelector('#mail + span.error');
 const firstNameError = document.querySelector('#firstName + span.error');
-
 const lastNameError = document.querySelector('#lastName + span.error');
+const pancardError = document.querySelector('#pancard + span.error');
+const countryError = document.querySelector('#country + span.error');
+const stateError = document.querySelector('#state + span.error');
+const cityError = document.querySelector('#city + span.error');
 
 email.addEventListener('input', () => {
   // Each time the user types something, we check if the
@@ -45,6 +51,57 @@ lastName.addEventListener('input', () => {
     lastNameError.className = 'error';
   } else {
     showError(lastName, lastNameError);
+  }
+});
+
+// PAN structure is as follows: AAAAA9999A:
+// First five characters are letters, next 4 numerals, last character letter.
+
+pancard.addEventListener('input', () => {
+  let pancardRegex = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
+  let isPancardValid = pancardRegex.test(pancard.value);
+
+  if (isPancardValid === true && pancard.validity.valid === true) {
+    pancardError.innerHTML = '';
+    pancardError.className = 'error';
+  } else {
+    showError(pancard, pancardError);
+  }
+});
+
+country.addEventListener('input', () => {
+  let countryRegex = /[a-zA-Z]{3,}/;
+  let isCountryValid = countryRegex.test(country.value);
+
+  if (isCountryValid === true && country.validity.valid === true) {
+    countryError.innerHTML = '';
+    countryError.className = 'error';
+  } else {
+    showError(country, countryError);
+  }
+});
+
+state.addEventListener('input', () => {
+  let stateRegex = /[a-zA-Z]{3,}/;
+  let isstateValid = stateRegex.test(state.value);
+
+  if (isstateValid === true && state.validity.valid === true) {
+    stateError.innerHTML = '';
+    stateError.className = 'error';
+  } else {
+    showError(state, stateError);
+  }
+});
+
+city.addEventListener('input', () => {
+  let cityRegex = /[a-zA-Z]{3,}/;
+  let iscityValid = cityRegex.test(city.value);
+
+  if (iscityValid === true && city.validity.valid === true) {
+    cityError.innerHTML = '';
+    cityError.className = 'error';
+  } else {
+    showError(city, cityError);
   }
 });
 
