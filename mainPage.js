@@ -1,7 +1,7 @@
 const form = document.getElementsByTagName('form')[0];
-const email = document.getElementById('email');
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
+const email = document.getElementById('email');
 const pancard = document.getElementById('pancard');
 const country = document.getElementById('country');
 const state = document.getElementById('state');
@@ -178,7 +178,7 @@ form.addEventListener('submit', event => {
     facebookURL.value === '' ||
     twitterURL.value === ''
   ) {
-    alert('Please Fill All Required Fields');
+    // alert('Please Fill All Required Fields');
     event.preventDefault();
     return false;
   }
@@ -200,4 +200,119 @@ const showError = (field, fieldError) => {
 
   // Set the styling appropriately
   fieldError.className = 'error active';
+};
+
+const config = {
+  firstName: {
+    min: 3,
+    max: 15,
+    regex: '^[a-zA-Z ]{3,15}$',
+    required: true
+  },
+  lastName: {
+    min: 3,
+    max: 15,
+    regex: '^[a-zA-Z ]{3,15}$',
+    required: true
+  },
+  email: {
+    min: 8,
+    max: 30,
+    regex:
+      "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+    required: true
+  },
+  pancard: {
+    min: 10,
+    max: 10,
+    regex: '[A-Z]{5}[0-9]{4}[A-Z]{1}',
+    required: true
+  },
+  country: {
+    min: 3,
+    max: 50,
+    regex: '[a-zA-Z]{3,50}',
+    required: true
+  },
+  state: {
+    min: 3,
+    max: 50,
+    regex: '[a-zA-Z]{3,50}',
+    required: true
+  },
+  city: {
+    min: 3,
+    max: 50,
+    regex: '[a-zA-Z]{3,50}',
+    required: true
+  },
+  phoneNumber: {
+    min: 10,
+    max: 10,
+    // prettier-ignore
+    regex: '(7|8|9)\d{9}',
+    required: true
+  },
+  githubURL: {
+    min: 20,
+    max: 500,
+    // prettier-ignore
+    regex: '/^https?:\/\/github.com\/[^\/]*\/?$/',
+    required: true
+  },
+  facebookURL: {
+    min: 22,
+    max: 500,
+    // prettier-ignore
+    regex: '/^https?:\/\/facebook.com\/[^\/]*\/?$/',
+    required: true
+  },
+  twitterURL: {
+    min: 21,
+    max: 500,
+    // prettier-ignore
+    regex: '/^https?:\/\/github.com\/[^\/]*\/?$/',
+    required: true
+  }
+};
+
+const validateInputs = (...x) => {
+  for (let i = 0; i < x.length; i++) {
+    if (
+      x[i].value.length >= config[`${x[i].id}`].min &&
+      x[i].value.length <= config[`${x[i].id}`].max &&
+      x[i].required === true &&
+      new RegExp(config[x[i].id].regex).test(x[i].value) === true
+      // Convert string to RegExp
+    ) {
+      // If all the above conditions pass
+    } else {
+      // Display error message depending on which input is wrong
+      if (x[i] === firstName) {
+        console.log('wrong firstname');
+      } else if (x[i] === lastName) {
+        console.log('wrong lastname bsdk');
+      } else if (x[i] === email) {
+        console.log('wrong email');
+      } else if (x[i] === pancard) {
+        console.log('wrong pancard');
+      }
+    }
+  }
+};
+
+const validate = () => {
+  validateInputs(
+    firstName,
+    lastName,
+    email,
+    pancard,
+    country,
+    state,
+    city,
+    phoneNumber,
+    githubURL,
+    facebookURL,
+    twitterURL
+  );
 };
