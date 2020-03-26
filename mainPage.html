@@ -21,22 +21,15 @@
           <div class="col">
             <input
               id="firstName"
-              required
               autocomplete="off"
               type="text"
-              minlength="3"
-              maxlength="15"
               class="form-control"
               placeholder="First name"
               name="firstName"
             />
-            <span class="error"></span>
           </div>
           <div class="col">
             <input
-              required
-              minlength="3"
-              maxlength="15"
               autocomplete="off"
               type="text"
               class="form-control"
@@ -44,45 +37,35 @@
               name="lastName"
               id="lastName"
             />
-            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
               id="email"
-              required
               autocomplete="off"
               type="text"
               name="email"
               class="form-control"
               placeholder="Email"
-              minlength="8"
             />
-            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
-              required
               autocomplete="off"
               type="text"
-              minlength="10"
-              maxlength="10"
               class="form-control"
               placeholder="Pancard Number - Example: ABCDE9807H"
               name="pancard"
               id="pancard"
             />
-            <span class="error"></span>
           </div>
         </div>
         <div class="form-row">
           <div class="col-4">
             <input
-              required
-              minlength="3"
               autocomplete="off"
               type="text"
               class="form-control"
@@ -90,12 +73,9 @@
               name="country"
               id="country"
             />
-            <span class="error"></span>
           </div>
           <div class="col">
             <input
-              required
-              minlength="3"
               autocomplete="off"
               type="text"
               class="form-control"
@@ -103,12 +83,9 @@
               name="state"
               id="state"
             />
-            <span class="error"></span>
           </div>
           <div class="col">
             <input
-              required
-              minlength="3"
               autocomplete="off"
               type="text"
               class="form-control"
@@ -116,76 +93,77 @@
               name="city"
               id="city"
             />
-            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
-              required
               autocomplete="off"
               type="text"
               name="phoneNumber"
               class="form-control"
               placeholder="Phone Number - 10 Digit"
               name="phNumber"
-              minlength="10"
-              maxlength="10"
               id="phoneNumber"
             />
-            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
-              required
               autocomplete="off"
               type="text"
               name="githubURL"
               class="form-control"
               placeholder="Github URL - Example: https://github.com/FrozenHearth"
               id="githubURL"
-              minlength="20"
             />
-            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
               id="facebookURL"
-              required
               autocomplete="off"
               type="text"
               name="facebookURL"
-              minlength="22"
               class="form-control"
               placeholder="Facebook URL - Example: https://facebook.com/FrozenHearth"
             />
-            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input
               id="twitterURL"
-              required
               autocomplete="off"
               type="text"
               name="twitterURL"
               class="form-control"
               placeholder="Twitter URL - Example: https://twitter.com/FrozenHearth"
-              minlength="21"
             />
-            <span class="error"></span>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <button type="submit" class="btn btn-success">
+            <div id="error-wrapper" class="col-12 ">
+              <div class="error-container">
+                <p class="error" id="firstNameErr"></p>
+                <p class="error" id="lastNameErr"></p>
+                <p class="error" id="emailErr"></p>
+                <p class="error" id="pancardErr"></p>
+                <p class="error" id="countryErr"></p>
+                <p class="error" id="stateErr"></p>
+                <p class="error" id="cityErr"></p>
+                <p class="error" id="phoneNumberErr"></p>
+                <p class="error" id="githubURLErr"></p>
+                <p class="error" id="facebookURLErr"></p>
+                <p class="error" id="twitterURLErr"></p>
+              </div>
+            </div>
+
+            <button onclick="validate()" type="submit" class="btn btn-success">
               Save
-              <!-- <a href="page2.html"> Save</a> -->
             </button>
             <button type="reset" class="btn btn-danger">Reset</button>
           </div>
