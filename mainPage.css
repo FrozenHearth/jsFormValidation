@@ -1,17 +1,4 @@
-input:invalid {
-  border-color: rgb(194, 74, 74);
-  background-color: rgb(236, 174, 174);
-}
-
-input:focus:invalid {
-  outline: none;
-}
-
-/* This is the style of our error messages */
-
-#error-wrapper {
-  display: none;
-}
+#error-wrapper,
 #hide {
   display: none;
 }
@@ -27,7 +14,6 @@ input:focus:invalid {
 }
 
 #error-wrapper {
-  /* border: 1px solid rgb(194, 74, 74); */
   height: auto;
 }
 
