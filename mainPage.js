@@ -80,21 +80,21 @@ const config = {
     min: 20,
     max: 500,
     // prettier-ignore
-    regex: '/^https?:\/\/github.com\/[^\/]*\/?$/',
+    regex: '^https?:\/\/github.com\/[^\/]*\/?$',
     required: true
   },
   facebookURL: {
     min: 22,
     max: 500,
     // prettier-ignore
-    regex: '/^https?:\/\/facebook.com\/[^\/]*\/?$/',
+    regex: '^https?:\/\/facebook.com\/[^\/]*\/?$',
     required: true
   },
   twitterURL: {
     min: 21,
     max: 500,
     // prettier-ignore
-    regex: '/^https?:\/\/github.com\/[^\/]*\/?$/',
+    regex: '^https?:\/\/github.com\/[^\/]*\/?$',
     required: true
   }
 };
@@ -103,250 +103,96 @@ const showError = (elemId, hintMsg) => {
   document.getElementById(elemId).innerHTML = hintMsg;
 };
 
-const validate = () => {
+const assignErrorClass = (...inputs) => {
   const errorClass = 'form-control has-error';
-  firstName.className = errorClass;
-  lastName.className = errorClass;
-  email.className = errorClass;
-  pancard.className = errorClass;
-  country.className = errorClass;
-  state.className = errorClass;
-  city.className = errorClass;
-  phoneNumber.className = errorClass;
-  githubURL.className = errorClass;
-  facebookURL.className = errorClass;
-  twitterURL.className = errorClass;
+  const result = inputs.map(input => {
+    input.className = errorClass;
+    return input;
+  });
+  return result;
+};
 
-  // Firstname validation
+const validateInputs = (...inputs) => {
+  for (let i = 0; i < inputs.length; i++) {
+    if (inputs[i].value === '') {
+      showError(`${inputs[i].name}Err`, `Please enter your ${inputs[i].name}`);
+    } else if (
+      new RegExp(config[inputs[i].name].regex).test(inputs[i].value) === false
+    ) {
+      showError(
+        `${inputs[i].name}Err`,
+        `Please enter a valid ${inputs[i].name} `
+      );
+    } else if (
+      inputs[i].value.length < config[inputs[i].name].min ||
+      inputs[i].value.length > config[inputs[i].name].max
+    ) {
+      showError(
+        `${inputs[i].name}Err`,
+        `${inputs[i].name} can only be between ${
+          config[inputs[i].name].min
+        } and ${config[inputs[i].name].max} characters. `
+      );
+    } else {
+      showError(`${inputs[i].name}Err`, '');
+      inputs[i].name.className = 'form-control';
+      if (inputs[i] === firstName) {
+        firstNameError.className = 'hide';
+      } else if (inputs[i] === lastName) {
+        lastNameError.className = 'hide';
+      } else if (inputs[i] === pancard) {
+        pancardError.className = 'hide';
+      } else if (inputs[i] === email) {
+        emailError.className = 'hide';
+      } else if (inputs[i] === country) {
+        countryError.className = 'hide';
+      } else if (inputs[i] === state) {
+        stateError.className = 'hide';
+      } else if (inputs[i] === city) {
+        cityError.className = 'hide';
+      } else if (inputs[i] === phoneNumber) {
+        phoneNumberError.className = 'hide';
+      } else if (inputs[i] === githubURL) {
+        githubURLError.className = 'hide';
+      } else if (inputs[i] === facebookURL) {
+        facebookURLError.className = 'hide';
+      } else if (inputs[i] === twitterURL) {
+        twitterURLError.className = 'hide';
+      }
+    }
+  }
+};
+
+const validate = () => {
+  assignErrorClass(
+    firstName,
+    lastName,
+    email,
+    pancard,
+    country,
+    state,
+    city,
+    phoneNumber,
+    githubURL,
+    facebookURL,
+    twitterURL
+  );
 
   errorWrapper.style.display = 'block';
 
-  if (firstName.value === '') {
-    showError('firstNameErr', 'Please enter your first name');
-  } else if (
-    new RegExp(config.firstName.regex).test(firstName.value) === false
-  ) {
-    showError('firstNameErr', 'Please enter a valid name');
-  } else if (
-    firstName.value.length < config.firstName.min ||
-    firstName.value.length > config.firstName.max
-  ) {
-    showError(
-      'firstNameErr',
-      `First name can only be between ${config.firstName.min} and ${config.firstName.max} characters. `
-    );
-  } else {
-    showError('firstNameErr', '');
-    firstName.className = 'form-control';
-    firstNameError.id = 'hide';
-  }
-
-  // Lastname validation
-
-  if (lastName.value === '') {
-    showError('lastNameErr', 'Please enter your last name');
-  } else if (new RegExp(config.lastName.regex).test(lastName.value) === false) {
-    showError('lastNameErr', 'Please enter a valid last name');
-  } else if (
-    lastName.value.length < config.lastName.min ||
-    lastName.value.length > config.lastName.max
-  ) {
-    showError(
-      'lastNameErr',
-      `Last name can only be between ${config.lastName.min} and ${config.lastName.max} characters. `
-    );
-  } else {
-    showError('lastNameErr', '');
-    lastName.className = 'form-control';
-    lastNameError.id = 'hide';
-  }
-
-  // Email validation
-
-  if (email.value === '') {
-    showError('emailErr', 'Please enter your email');
-  } else if (new RegExp(config.email.regex).test(email.value) === false) {
-    showError('emailErr', 'Please enter a valid email');
-  } else if (
-    email.value.length < config.email.min ||
-    email.value.length > config.email.max
-  ) {
-    showError(
-      'emailErr',
-      `Email can only be between ${config.email.min} and ${config.email.max} characters. `
-    );
-  } else {
-    showError('emailErr', '');
-    email.className = 'form-control';
-    emailError.id = 'hide';
-  }
-
-  // Pancard validation
-
-  if (pancard.value === '') {
-    showError('pancardErr', 'Please enter your pancard number');
-  } else if (new RegExp(config.pancard.regex).test(pancard.value) === false) {
-    showError('pancardErr', 'Please enter a valid pancard number');
-  } else if (
-    pancard.value.length < config.pancard.min ||
-    pancard.value.length > config.pancard.min
-    // Here min and max are the same length
-  ) {
-    showError(
-      'pancardErr',
-      `Pancard number can only be between ${config.pancard.min} and ${config.pancard.max} characters. `
-    );
-  } else {
-    showError('pancardErr', '');
-    pancard.className = 'form-control';
-    pancardError.id = 'hide';
-  }
-
-  // Country validation
-
-  if (country.value === '') {
-    showError('countryErr', 'Please enter your country');
-  } else if (new RegExp(config.country.regex).test(country.value) === false) {
-    showError('countryErr', 'Please enter a valid country name');
-  } else if (
-    country.value.length < config.country.min ||
-    country.value.length > config.country.max
-  ) {
-    showError(
-      'countryErr',
-      `Country name can only be between ${config.country.min} and ${config.country.max} characters. `
-    );
-  } else {
-    showError('countryErr', '');
-    country.className = 'form-control';
-    countryError.id = 'hide';
-  }
-
-  // State validation
-
-  if (state.value === '') {
-    showError('stateErr', 'Please enter your state name');
-  } else if (new RegExp(config.state.regex).test(state.value) === false) {
-    showError('stateErr', 'Please enter a valid state name');
-  } else if (
-    state.value.length < config.state.min ||
-    state.value.length > config.state.max
-  ) {
-    showError(
-      'stateErr',
-      `State name can only be between ${config.state.min} and ${config.state.max} characters. `
-    );
-  } else {
-    showError('stateErr', '');
-    state.className = 'form-control';
-    stateError.id = 'hide';
-  }
-
-  // City validation
-
-  if (city.value === '') {
-    showError('cityErr', 'Please enter your city');
-  } else if (new RegExp(config.city.regex).test(city.value) === false) {
-    showError('cityErr', 'Please enter a valid city name');
-  } else if (
-    city.value.length < config.city.min ||
-    city.value.length > config.city.max
-  ) {
-    showError(
-      'cityErr',
-      `City name can only be between ${config.city.min} and ${config.city.max} characters. `
-    );
-  } else {
-    showError('cityErr', '');
-    city.className = 'form-control';
-    cityError.id = 'hide';
-  }
-
-  // Phone Number validation
-
-  if (phoneNumber.value === '') {
-    showError('phoneNumberErr', 'Please enter your phone number');
-  } else if (
-    new RegExp(config.phoneNumber.regex).test(phoneNumber.value) === false
-  ) {
-    showError('phoneNumberErr', 'Please enter a valid name');
-  } else if (
-    phoneNumber.value.length < config.phoneNumber.min ||
-    phoneNumber.value.length > config.phoneNumber.max
-  ) {
-    showError(
-      'phoneNumberErr',
-      `Phone number can only be between ${config.phoneNumber.max} characters. `
-    );
-  } else {
-    showError('phoneNumberErr', '');
-    phoneNumber.className = 'form-control';
-    phoneNumberError.id = 'hide';
-  }
-
-  // Github URL validation
-
-  if (githubURL.value === '') {
-    showError('githubURLErr', 'Please enter your github profile url');
-  } else if (
-    new RegExp(config.githubURL.regex).test(githubURL.value) === false
-  ) {
-    showError('githubURLErr', 'Please enter a valid url');
-  } else if (
-    githubURL.value.length < config.githubURL.min ||
-    githubURL.value.length > config.githubURL.max
-  ) {
-    showError(
-      'githubURLErr',
-      `Github profile url can only be between ${config.githubURL.min} and ${config.githubURL.max} characters. `
-    );
-  } else {
-    showError('githubURLErr', '');
-    githubURL.className = 'form-control';
-    githubURLError.id = 'hide';
-  }
-
-  // Facebook URL validation
-
-  if (facebookURL.value === '') {
-    showError('facebookURLErr', 'Please enter your facebook profile url');
-  } else if (
-    new RegExp(config.facebookURL.regex).test(facebookURL.value) === false
-  ) {
-    showError('facebookURLErr', 'Please enter a valid url');
-  } else if (
-    facebookURL.value.length < config.facebookURL.min ||
-    facebookURL.value.length > config.facebookURL.max
-  ) {
-    showError(
-      'facebookURLErr',
-      `Facebook profile url can only be between ${config.facebookURL.min} and ${config.facebookURL.max} characters. `
-    );
-  } else {
-    showError('facebookURLErr', '');
-    facebookURL.className = 'form-control';
-    facebookURLError.id = 'hide';
-  }
-
-  if (twitterURL.value === '') {
-    showError('twitterURLErr', 'Please enter your twitter profile url');
-  } else if (
-    new RegExp(config.twitterURL.regex).test(twitterURL.value) === false
-  ) {
-    showError('twitterURLErr', 'Please enter a valid url');
-  } else if (
-    twitterURL.value.length < config.twitterURL.min ||
-    twitterURL.value.length > config.twitterURL.max
-  ) {
-    showError(
-      'twitterURLErr',
-      `Twitter profile url can only be between ${config.twitterURL.min} and ${config.twitterURL.max} characters. `
-    );
-  } else {
-    showError('twitterURLErr', '');
-    twitterURL.className = 'form-control';
-    facebookURLError.id = 'hide';
-  }
+  validateInputs(
+    firstName,
+    lastName,
+    email,
+    pancard,
+    country,
+    state,
+    city,
+    phoneNumber,
+    githubURL,
+    facebookURL,
+    twitterURL
+  );
 };
 
 form.addEventListener('submit', event => {
@@ -367,18 +213,3 @@ form.addEventListener('submit', event => {
     return false;
   }
 });
-
-// const validateInputs = (...input) => {
-//   // prettier-ignore
-//   let firstNameErr = lastNameErr = emailErr = pancardErr = countryErr = stateErr = cityErr = phoneNumberErr = githubURLErr = facebookURLErr = twitterURLErr = true;
-//   for (let i = 0; i < input.length; i++) {
-//     if (
-//       input[i].value.length >= config[`${input[i].id}`].min &&
-//       input[i].value.length <= config[`${input[i].id}`].max &&
-//       input[i].required === true &&
-//       new RegExp(config[input[i].id].regex).test(input[i].value) === true
-//     ) {
-//       // Submit form
-//     }
-//   }
-// };
