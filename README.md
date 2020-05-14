@@ -1,1 +1,1 @@
-Form Validation in plain Javascript utilizing the inbuilt Constraint API.
+Form Validation in Javascript utilizing the inbuilt Constraint API.
